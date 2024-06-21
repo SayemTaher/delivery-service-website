@@ -26,7 +26,7 @@ const MyProfile = () => {
             if (res.data.success) {
                 const imageUrl = res.data.data.display_url;
                 await updateUserProfile(data.name, imageUrl);
-                
+
                 Swal.fire({
                     title: "Success!",
                     text: "Your profile has been updated",
@@ -51,22 +51,22 @@ const MyProfile = () => {
     };
 
     return (
-        <div>
-            <div><h1>Update your profile information</h1></div>
-            <div>
-                <img src={user?.photoURL} alt="User Photo" />
-                <h2>{user?.displayName}</h2>
-                <h3>{user?.email}</h3>
-            </div>
-            <div>
-                <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+                <div className="text-center mb-8">
+                    <h1 className="text-2xl font-bold text-blue-600 mb-2">Update Your Profile Information</h1>
+                    <img src={user?.photoURL} alt="User Photo" className="w-24 h-24 object-cover rounded-full mx-auto mb-4" />
+                    <h2 className="text-xl font-semibold text-gray-800">{user?.displayName}</h2>
+                    <h3 className="text-gray-600">{user?.email}</h3>
+                </div>
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <div>
                         <label className="block font-bold text-sm text-gray-800">Full Name</label>
                         <input
                             type="text"
                             {...register("name", { required: true })}
                             placeholder={user?.displayName}
-                            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg"
+                            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                         />
                         {errors.name && <span className="text-red-600">Name is required</span>}
                     </div>
@@ -75,11 +75,11 @@ const MyProfile = () => {
                         <input
                             type="file"
                             {...register("image", { required: true })}
-                            className="file-input file-input-bordered w-full"
+                            className="file-input file-input-bordered w-full mt-2"
                         />
                         {errors.image && <span className="text-red-600">Image is required</span>}
                     </div>
-                    <button type="submit" className="px-4 py-2 mt-4 text-white bg-blue-500 rounded-lg">
+                    <button type="submit" className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300">
                         Update Profile
                     </button>
                 </form>

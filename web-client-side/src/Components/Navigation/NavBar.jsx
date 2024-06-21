@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { LuBox } from "react-icons/lu";
 
 const NavBar = () => {
-    const {user,logOut} = useContext(AuthContext)
+    const {user,logOut,role} = useContext(AuthContext)
     const handleSignOut = ( ) => {
         logOut()
         .then(() => {
@@ -18,7 +18,16 @@ const NavBar = () => {
     const navigation = <div className="flex items-center gap-2">
 
         <li><Link>Home</Link></li>
-        <li><Link to='/dashboard/general'>Dashboard</Link></li>
+        {
+    role === 'admin' ? (
+        <li><Link to='/dashboard/adminHome'>Dashboard</Link></li>
+    ) : role === 'user' ? (
+        <li><Link to='/dashboard/BookParcels'>Dashboard</Link></li>
+    ) : role === 'delivery' ? (
+        <li><Link to='/dashboard/MyDelivery'>Dashboard</Link></li>
+    ) : <li><Link to='/dashboard/general'>Dashboard</Link></li>
+}
+
         {
             !user && <li><Link to='/register'>Register</Link></li>
         }
