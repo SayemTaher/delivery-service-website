@@ -4,7 +4,7 @@ import React, { createContext, useEffect, useState } from "react";
 
 import auth from "../../Authentication/firebase.config";
 
-import UseAxiosPublic from "../Axios/UseAxiosPublic";
+import useAxiosPublic from "../../AxiosPublic/useAxiosPublic";
  
 export const AuthContext = createContext(null);
  
@@ -13,28 +13,28 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const googleProvider = new GoogleAuthProvider()
-    const axiosPublic = UseAxiosPublic()
+    const axiosPublic = useAxiosPublic()
  
  
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
-            if (currentUser) {
-                const userInfo = {
-                    email : currentUser.email
-                }
-                axiosPublic.post('/jwt', userInfo)
-                    .then(res => {
-                        if (res.data.token) {
-                            localStorage.setItem('access-token', res.data.token)
-                            setLoading(false)
-                      }
-                })
-            }
-            else {
-                localStorage.removeItem('access-token')
-                setLoading(false)
-            }
+            // if (currentUser) {
+            //     const userInfo = {
+            //         email : currentUser.email
+            //     }
+            //     // axiosPublic.post('/jwt', userInfo)
+            //     //     .then(res => {
+            //     //         if (res.data.token) {
+            //     //             localStorage.setItem('access-token', res.data.token)
+            //     //             setLoading(false)
+            //     //       }
+            //     // })
+            // }
+            // else {
+            //     localStorage.removeItem('access-token')
+            //     setLoading(false)
+            // }
             console.log(currentUser)
            
             
@@ -66,12 +66,7 @@ const AuthProvider = ({ children }) => {
         return updateProfile(auth.currentUser, {
             displayName:name,photoURL:photo
         })
-        //     .then(() => {
-        //         toast.success('User profile updated successfully!')
-        //             .catch(error => {
-        //             toast.error(error.message)
-        //         })
-        // })
+       
     }
  
     const info = { user, loading,updateUserProfile, signIn,signInWithGoogle, createUser ,logOut,setLoading};

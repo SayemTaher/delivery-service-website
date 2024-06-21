@@ -1,0 +1,267 @@
+import React, { useContext, useEffect, useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
+import useAxiosPublic from '../../AxiosPublic/useAxiosPublic';
+import { useForm, useWatch } from 'react-hook-form';
+import { AuthContext } from '../Providers/AuthProvider';
+import Swal from 'sweetalert2';
+import { RiBox3Fill } from 'react-icons/ri';
+
+const UpdateParcel = () => {
+    const data = useLoaderData()
+    const { user } = useContext(AuthContext)
+    const axiosPublic = useAxiosPublic()
+    const { register, handleSubmit, control, formState: { errors }, reset } = useForm();
+    const [price, setPrice] = useState(0);
+
+    const weight = useWatch({
+        control,
+        name: 'weight',
+        defaultValue: data.weight,
+    });
+
+    useEffect(() => {
+        // Calculate price based on weight: price is 50 per kg
+        const weightNum = parseFloat(weight);
+        if (weightNum > 0) {
+            setPrice(weightNum * 50);
+        } else {
+            setPrice(0);
+        }
+    }, [weight]);
+
+    const { _id,
+        user_Phone_Number,
+        requested_Delivery_Date,
+        receiver_Name,
+        receivers_Phone,
+        delivery_Address,
+        package_Type,
+        location_Latitude,
+        location_Longitude,
+    } = data
+
+    const onSubmit = async (formData) => {
+        formData.price = price;
+        
+        const parcelBookingData = {
+            user_Name: user?.displayName,
+            user_Email: user?.email,
+            user_Photo: user?.photoURL,
+            user_Phone_Number: formData.phone,
+            requested_Delivery_Date: new Date(formData.date), // Convert to Date object
+            price: formData.price,
+            receiver_Name: formData.receiver,
+            receivers_Phone: formData.receiversPhone,
+            package_Type: formData.type,
+            location_Latitude: formData.latitude,
+            location_Longitude: formData.longitude,
+            delivery_Address: formData.address,
+            weight: formData.weight,
+            status: 'pending'
+        }
+    
+        try {
+            const response = await axiosPublic.patch(`/parcelBookingData/${_id}`, parcelBookingData);
+            if (response.data.modifiedCount > 0) {
+                Swal.fire({
+                    title: "Success",
+                    text: "Your parcel has been updated",
+                    icon: "success"
+                });
+                reset();
+            }
+        } catch (error) {
+            console.error("Error occurred while updating parcel:", error);
+            Swal.fire({
+                title: "Error",
+                text: "Failed to update your parcel. Please try again later.",
+                icon: "error"
+            });
+        }
+    };
+
+    return (
+        <div className='p-5 flex bg-gray-100 flex-col min-h-screen justify-center '>
+            <div>
+                <h2 className="text-2xl font-bold pb-5 flex items-center text-blue-600 gap-2"><RiBox3Fill /> Update Parcel</h2>
+            </div>
+            <div className='bg-white pb-5 pl-4 pr-4 '>
+                <form
+                    className="mt-6 flex border-2 pb-4 pt-2 border-dotted flex-col gap-5 items-center justify-center"
+                    onSubmit={handleSubmit(onSubmit)}
+                >
+                    <div className='flex gap-5 items-center justify-center'>
+                        {/* First set of fields */}
+                        <div className='flex gap-2 flex-col w-64'>
+                            <div>
+                                <label className="block font-bold text-sm text-gray-800">Full Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    readOnly
+                                    defaultValue={user?.displayName}
+                                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg"
+                                />
+                            </div>
+                            <div>
+                                <label className="block font-bold text-sm text-gray-800">Email</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    readOnly
+                                    defaultValue={user?.email}
+                                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg"
+                                />
+                            </div>
+                            <div>
+                                <label className="block font-bold text-sm text-gray-800">Phone Number</label>
+                                <input
+                                    type="text"
+                                    name="phone"
+                                    {...register("phone", { required: true })}
+                                    defaultValue={user_Phone_Number}
+                                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg"
+                                />
+                                {errors.phone && (
+                                    <span className="text-red-500 mt-2">This field is required</span>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block font-bold text-sm text-gray-800">Parcel Type</label>
+                                <input
+                                    type="text"
+                                    name="type"
+                                    {...register("type", { required: true })}
+                                    defaultValue={package_Type}
+                                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg"
+                                />
+                                {errors.type && (
+                                    <span className="text-red-500 mt-2">This field is required</span>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block font-bold text-sm text-gray-800">Parcel Weight (kg)</label>
+                                <input
+                                    type="number"
+                                    name="weight"
+                                    {...register("weight", {
+                                        required: true,
+                                        min: {
+                                            value: 1,
+                                            message: "Parcel weight must be greater than or equal to 1"
+                                        }
+                                    })}
+                                    defaultValue={data.weight}
+                                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg"
+                                />
+                                {errors.weight && (
+                                    <span className="text-red-500 mt-2">This field is required</span>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block font-bold text-sm text-gray-800">Receiver's Name</label>
+                                <input
+                                    type="text"
+                                    name="receiver"
+                                    {...register("receiver", { required: true })}
+                                    defaultValue={receiver_Name}
+                                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg"
+                                />
+                                {errors.receiver && (
+                                    <span className="text-red-500 mt-2">This field is required</span>
+                                )}
+                            </div>
+                        </div>
+                        {/* Second set of fields */}
+                        <div className='flex gap-2 flex-col w-64'>
+                            <div>
+                                <label className="block font-bold text-sm text-gray-800">Receiver's Phone Number</label>
+                                <input
+                                    type="text"
+                                    name="receiversPhone"
+                                    {...register("receiversPhone", { required: true })}
+                                    defaultValue={receivers_Phone}
+                                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg"
+                                />
+                                {errors.receiversPhone && (
+                                    <span className="text-red-500 mt-2">This field is required</span>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block font-bold text-sm text-gray-800">Parcel Delivery Address</label>
+                                <input
+                                    type="text"
+                                    name="address"
+                                    {...register("address", { required: true })}
+                                    defaultValue={delivery_Address}
+                                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg"
+                                />
+                                {errors.address && (
+                                    <span className="text-red-500 mt-2">This field is required</span>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block font-bold text-sm text-gray-800">Requested Delivery Date</label>
+                                <input
+                                    type="date"
+                                    name="date"
+                                    {...register("date", { required: true })}
+                                    defaultValue={new Date(requested_Delivery_Date).toISOString().split('T')[0]}
+                                    className="block w-full px-4 py-1 mt-2 text-gray-700 bg-white border rounded-lg"
+                                />
+                                {errors.date && (
+                                    <span className="text-red-500 mt-2">This field is required</span>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block font-bold text-sm text-gray-800">Delivery Address Latitude</label>
+                                <input
+                                    type="text"
+                                    name="latitude"
+                                    {...register("latitude", { required: true })}
+                                    defaultValue={location_Latitude}
+                                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg"
+                                />
+                                {errors.latitude && (
+                                    <span className="text-red-500 mt-2">This field is required</span>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block font-bold text-sm text-gray-800">Delivery Address Longitude</label>
+                                <input
+                                    type="text"
+                                    name="longitude"
+                                    {...register("longitude", { required: true })}
+                                    defaultValue={location_Longitude}
+                                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg"
+                                />
+                                {errors.longitude && (
+                                    <span className="text-red-500 mt-2">This field is required</span>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block font-bold text-sm text-gray-800">Price (Auto-calculated)</label>
+                                <input
+                                    type="text"
+                                    name="price"
+                                    readOnly
+                                    value={price}
+                                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="mt-6">
+                        <input
+                            type="submit"
+                            value="Update your parcel"
+                            className="w-full px-6 py-2.5 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+                        />
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default UpdateParcel;

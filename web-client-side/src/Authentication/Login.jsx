@@ -7,7 +7,8 @@ import { SlArrowLeftCircle } from "react-icons/sl";
 import toast from "react-hot-toast";
 
 import { AuthContext } from "../Components/Providers/AuthProvider";
-import UseAxiosPublic from "../Components/Axios/UseAxiosPublic";
+
+import useAxiosPublic from "../AxiosPublic/useAxiosPublic";
  
 const Login = () => {
     
@@ -16,7 +17,7 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
-    const axiosPublic = UseAxiosPublic()
+    const axiosPublic = useAxiosPublic()
  
 
  
