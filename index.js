@@ -29,6 +29,7 @@ async function run() {
     // Send a ping to confirm a successful connection
     const userCollection = client.db('delivery-service').collection('users')
     const bookedParcelCollection = client.db('delivery-service').collection('booked-Parcel')
+    const reviewCollection = client.db('delivery-service').collection('reviews')
     //post users to database upon login
 
     app.post('/user', async(req,res)=>{
@@ -138,6 +139,19 @@ app.get('/allBookedParcel', async(req,res) =>{
     const data = await bookedParcelCollection.find().toArray()
     res.send(data)
 })
+//get delivery riders orders based on id  
+
+app.get('/myParcels/:deliveryRiderId', async (req, res) => {
+    const deliveryRiderId = req.params.deliveryRiderId;
+
+    try {
+        const parcels = await bookedParcelCollection.find({ delivery_Rider_Id: deliveryRiderId }).toArray();
+        res.status(200).json(parcels);
+    } catch (error) {
+        console.error('Error fetching parcels:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 // get specific parcel id 
 app.get('/parcelBookingData/:id', async(req,res) =>{
     const id = req.params.id
@@ -246,6 +260,8 @@ app.patch('/parcelBookingData/:id', async (req, res) => {
 app.patch('/parcelBookingData/:id/status', async (req, res) => {
     const id = req.params.id;
     const { status } = req.body;
+    console.log(req.body)
+    console.log(id)
 
     try {
         const filter = { _id: new ObjectId(id) };
@@ -266,6 +282,48 @@ app.patch('/parcelBookingData/:id/status', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+// give review 
+// Give review 
+app.post('/reviews', async (req, res) => {
+    const data = req.body;
+    const result = await reviewCollection.insertOne(data);
+    res.send(result);
+});
+
+// Get reviews based on specific delivery rider's id 
+app.get('/reviews/:deliveryRiderId', async (req, res) => {
+    const deliveryRiderId = req.params.deliveryRiderId;
+
+    try {
+        const parcels = await reviewCollection.find({ delivery_Rider_Id: deliveryRiderId }).toArray();
+        res.status(200).json(parcels);
+    } catch (error) {
+        console.error('Error fetching parcels:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+app.get('/parcels/delivered/:deliveryManId', async (req, res) => {
+    const deliveryManId = req.params.deliveryManId;
+    try {
+        const parcels = await bookedParcelCollection.find({ delivery_Rider_Id: deliveryManId, status: 'delivered' }).toArray();
+        res.status(200).json(parcels);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Fetch reviews for a specific delivery man
+app.get('/reviews/:deliveryManId', async (req, res) => {
+    const deliveryManId = req.params.deliveryManId;
+    try {
+        const reviews = await reviewCollection.find({ delivery_Rider_Id: deliveryManId }).toArray();
+        res.status(200).json(reviews);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 
 
