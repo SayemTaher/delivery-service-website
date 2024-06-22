@@ -166,7 +166,7 @@ const Login = () => {
         </div>
         <div
           data-aos="fade-up-left"
-          className="mr-10 hidden lg:flex ml-10 lg:mr-0 rounded-md border-2 border-white lg:ml-0 bg-[url('https://i.ibb.co/7YKzRf4/image-5.jpg')] h-[650px] bg-no-repeat bg-cover w-full"
+          className="mr-10 hidden lg:flex ml-10 lg:mr-0 rounded-md border-2 border-white lg:ml-0 bg-[url('https://i.ibb.co/dQmyzh5/maxim-zrr-UJf-Qb-Y2g-unsplash.jpg')] h-[650px] bg-no-repeat bg-cover w-full"
         ></div>
       </div>
       <div className="mt-5 ">
