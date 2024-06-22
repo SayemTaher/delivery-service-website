@@ -101,7 +101,7 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/update/:id',
                 element: <UpdateParcel></UpdateParcel>,
-                loader: ({params}) => fetch(`http://localhost:3000/parcelBookingData/${params.id}`)
+                loader: ({params}) => fetch(`https://server-side-rose.vercel.app/parcelBookingData/${params.id}`)
 
             },
             //genral 

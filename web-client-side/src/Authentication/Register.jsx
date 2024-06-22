@@ -87,7 +87,7 @@ const Register = () => {
             className=" flex bg-bgPrimary flex-col pt-10 lg:pt-0 justify-center min-h-screen"
         >
             <Helmet>
-                <title>Restaurant | User Register</title>
+                <title>Fast Track | User Register</title>
             </Helmet>
             <div className="flex justify-between ml-5 mr-5 gap-5 flex-col lg:flex-row">
                 <div
@@ -100,7 +100,7 @@ const Register = () => {
                 >
                     <div className="flex justify-center mx-auto">
                         <p className="text-2xl tracking-wide font-semibold">
-                            Restaurant | Register
+                            Fast Track | Register
                         </p>
                     </div>
 

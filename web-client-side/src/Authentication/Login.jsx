@@ -62,7 +62,7 @@ const Login = () => {
       className="min-h-screen flex lg:pt-0 flex-col justify-center bg-bgPrimary"
     >
       <Helmet>
-        <title>Restaurant | Login </title>
+        <title>Fast Track | Login </title>
       </Helmet>
       <div className="flex flex-col ml-5 mr-5 lg:flex-row md:flex-row gap-5 justify-center items-center lg:items-center lg:justify-between">
         <div
@@ -71,7 +71,7 @@ const Login = () => {
         >
           <div className="flex justify-center mx-auto">
             <p className="text-2xl tracking-wide font-semibold">
-              Restaurant | Sign In
+              Fast Track | Sign In
             </p>
           </div>
  
