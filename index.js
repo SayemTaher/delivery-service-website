@@ -291,6 +291,12 @@ app.post('/reviews', async (req, res) => {
     res.send(result);
 });
 
+//get all the reviews 
+app.get('/reviews' ,async(req,res) =>{
+    const data = await reviewCollection.find().toArray()
+    res.send(data)
+})
+
 // Get reviews based on specific delivery rider's id 
 app.get('/reviews/:deliveryRiderId', async (req, res) => {
     const deliveryRiderId = req.params.deliveryRiderId;
