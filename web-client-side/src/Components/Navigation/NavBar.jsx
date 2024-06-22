@@ -91,7 +91,7 @@ const NavBar = () => {
                                     <li><Link to='/dashboard/BookParcels'>Dashboard</Link></li>
                                 ) : role === 'delivery' ? (
                                     <li><Link to='/dashboard/MyDelivery'>Dashboard</Link></li>
-                                ) : <li><Link to='/dashboard/general'>Dashboard</Link></li>
+                                ) : <li><Link to='/'>Home</Link></li>
                             }
                             <li><button className="bg-red-500 btn  flex items-center gap-2 text-center w-[80px] rounded-full text-white" onClick={handleSignOut}>Logout</button></li>
                         </ul> :
