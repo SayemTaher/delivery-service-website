@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
 import useAxiosPublic from '../../AxiosPublic/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet-async';
 
 const MyReviews = () => {
     const { user, loading } = useContext(AuthContext);
@@ -41,6 +42,7 @@ const MyReviews = () => {
     return (
         <div className='p-5'>
             <div className='border-b-2 border-dashed pb-5'>
+            <Helmet><title>Fast Track | My Reviews</title></Helmet>
                 <h1 className='text-2xl font-bold text-blue-800'>
                     My Reviews <sup className='bg-purple-100 p-2 text-purple-600 rounded-full'>{reviews?.length}</sup>
                 </h1>
