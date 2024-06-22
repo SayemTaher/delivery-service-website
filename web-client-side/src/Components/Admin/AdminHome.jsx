@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../AxiosPublic/useAxiosPublic";
 import ReactApexChart from 'react-apexcharts';
 import { ImStatsBars } from "react-icons/im";
+import { Helmet } from 'react-helmet-async';
 
 const AdminHome = () => {
     const axiosPublic = useAxiosPublic();
@@ -65,6 +66,7 @@ const AdminHome = () => {
 
     return (
         <div className='flex flex-col m-10'>
+            <Helmet><title>Fast Track | Admin Home</title></Helmet>
             <div className='border-b-2 border-dashed pb-5'>
                 <h1 className='text-3xl font-bold pb-5 flex items-center gap-2 text-blue-950 border-b-2 '><span className='text-purple-600'><ImStatsBars></ImStatsBars></span> Statistics </h1>
             <h2 className='bg-blue-100 text-blue-700 mt-5 font-semibold p-2'>The below bar chart shows an  overview of Bookings by Date</h2>
