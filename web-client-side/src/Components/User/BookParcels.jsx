@@ -4,6 +4,7 @@ import { AuthContext } from '../Providers/AuthProvider';
 import useAxiosPublic from '../../AxiosPublic/useAxiosPublic';
 import Swal from 'sweetalert2';
 import { RiBox3Fill } from "react-icons/ri";
+import { Helmet } from 'react-helmet-async';
 
 const BookParcels = () => {
     const { user } = useContext(AuthContext);
@@ -71,6 +72,7 @@ const BookParcels = () => {
 
     return (
         <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+            <Helmet><title>Fast Track | Book a parcel</title></Helmet>
             <div className='bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl'>
                 <h2 className="text-2xl font-bold mb-6 flex items-center text-blue-600 gap-2">
                     <RiBox3Fill /> Book a Parcel
