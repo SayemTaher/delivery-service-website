@@ -5,6 +5,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import { AuthContext } from '../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 import { RiBox3Fill } from 'react-icons/ri';
+import { Helmet } from 'react-helmet-async';
 
 const UpdateParcel = () => {
     const data = useLoaderData()
@@ -81,6 +82,7 @@ const UpdateParcel = () => {
 
     return (
         <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+            <Helmet><title>Fast Track | Update parcel </title></Helmet>
             <div className='bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl'>
                 <h2 className="text-2xl font-bold mb-6 flex items-center text-blue-600 gap-2">
                     <RiBox3Fill /> Update Parcel
