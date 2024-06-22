@@ -92,7 +92,7 @@ const Register = () => {
             <div className="flex justify-between ml-5 mr-5 gap-5 flex-col lg:flex-row">
                 <div
                     data-aos="fade-up-left"
-                    className=" hidden lg:flex mr-10 ml-10 lg:mr-0 rounded-md border-2 border-white  lg:ml-0 bg-[url('https://i.ibb.co/7YKzRf4/image-5.jpg')] h-[645px] bg-no-repeat bg-cover w-full"
+                    className=" hidden lg:flex mr-10 ml-10 lg:mr-0 rounded-md border-2 border-white  lg:ml-0 bg-[url('https://i.ibb.co/dQmyzh5/maxim-zrr-UJf-Qb-Y2g-unsplash.jpg')] h-[645px] bg-no-repeat bg-cover w-full"
                 ></div>
                 <div
                     data-aos="fade-up-right"
