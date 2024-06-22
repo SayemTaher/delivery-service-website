@@ -10,6 +10,7 @@ import { MdOutlineReviews } from "react-icons/md";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import { useQuery } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import { Helmet } from 'react-helmet-async';
 
 const MyParcels = () => {
     const { user } = useContext(AuthContext);
@@ -124,6 +125,7 @@ const MyParcels = () => {
 
     return (
         <div className='p-5'>
+            <Helmet><title>Fast Track | My Parcels</title></Helmet>
             <div className='border-b-2 pb-5 border-dashed'>
                 <h1 className='flex text-xl font-bold text-blue-800 items-center gap-2'>
                     Manage your parcels -
