@@ -3,6 +3,7 @@ import { AuthContext } from '../Providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../AxiosPublic/useAxiosPublic';
+import { Helmet } from 'react-helmet-async';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_API;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -52,6 +53,7 @@ const MyProfile = () => {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+            <Helmet><title>Fast Track | My Profile</title></Helmet>
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
                 <div className="text-center mb-8">
                     <h1 className="text-2xl font-bold text-blue-600 mb-2">Update Your Profile Information</h1>
