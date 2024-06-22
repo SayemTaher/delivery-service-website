@@ -1,6 +1,7 @@
 import Banner from "./Banner";
 import Featured from "./Featured";
 import Statistics from "./Statistics";
+import TopDelivery from "./TopDelivery";
 
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
             <Banner></Banner>
             <Featured></Featured>
             <Statistics></Statistics>
+            <TopDelivery></TopDelivery>
             
         </div>
     );
