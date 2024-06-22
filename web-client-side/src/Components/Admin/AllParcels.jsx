@@ -9,6 +9,7 @@ import { TiTick } from "react-icons/ti";
 import { TbTruckDelivery } from "react-icons/tb";
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import { Helmet } from 'react-helmet-async';
 
 const AllParcels = () => {
     const axiosPublic = useAxiosPublic();
@@ -104,6 +105,7 @@ const AllParcels = () => {
 
     return (
         <div className='flex flex-col gap-5 p-5'>
+            <Helmet><title>Fast Track | All Parcels</title></Helmet>
             <div className='border-b-2 border-dashed pb-5'>
                 <h1 className='flex text-xl font-bold text-blue-800 items-center gap-2'>
                     Overview of all the parcels -
