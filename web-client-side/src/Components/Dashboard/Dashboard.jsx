@@ -6,6 +6,7 @@ const Dashboard = () => {
     
     return (
         <div className='flex  '>
+            
             <div>
               <DashboardRoute></DashboardRoute>  
             </div>

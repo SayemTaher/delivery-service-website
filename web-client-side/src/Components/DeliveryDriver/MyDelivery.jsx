@@ -3,6 +3,7 @@ import { AuthContext } from '../Providers/AuthProvider';
 import useAxiosPublic from '../../AxiosPublic/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const MyDeliveryList = () => {
     const { user, loading } = useContext(AuthContext);
@@ -87,6 +88,7 @@ const MyDeliveryList = () => {
 
     return (
         <div className='flex flex-col gap-5 p-5'>
+            <Helmet><title>Fast Track | My Delivery</title></Helmet>
             <div className='border-b-2 border-dashed pb-5'>
                 <h1 className='flex text-xl font-bold text-blue-800 items-center gap-2'>
                     Manage Your Delivery <sup className='bg-purple-100 p-2 text-purple-600'>{parcels?.length}</sup>
