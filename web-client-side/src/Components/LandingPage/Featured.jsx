@@ -22,7 +22,7 @@ const Featured = () => {
     ];
 
     return (
-        <div className='flex flex-col gap-5 p-10 bg-gray-50 mt-10 mb-10 items-center justify-center flex-wrap'>
+        <div data-aos="fade-up" className='flex flex-col gap-5 p-10 bg-gray-50 mt-10 mb-10 items-center justify-center flex-wrap'>
             <div className='mb-4 mt-4 border-b-2 pb-5'>
                 <h1 className='text-4xl text-center font-bold text-blue-900'>Why customers choose us?</h1>
             </div>

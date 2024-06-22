@@ -113,7 +113,7 @@ const MyParcels = () => {
                 return 'text-red-600';
             case 'delivered':
                 return 'text-green-600';
-            case 'on the way':
+            case 'On The Way':
                 return 'text-blue-600';
             case 'pending':
                 return 'text-purple-600';
@@ -137,6 +137,7 @@ const MyParcels = () => {
                         <option value="">All</option>
                         <option value="pending">Pending</option>
                         <option value="delivered">Delivered</option>
+                        <option value="On The Way">on the way</option>
                         <option value="canceled">Canceled</option>
                     </select>
                 </div>

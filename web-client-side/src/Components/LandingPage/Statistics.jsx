@@ -27,7 +27,7 @@ const Statistics = () => {
     const totalNumberOfUsers = userData.length;
 
     return (
-        <div className='flex text-center flex-col gap-5 p-10 bg-gray-50 mt-10 mb-10 items-center justify-center flex-wrap'>
+        <div data-aos="fade-up" className='flex text-center flex-col gap-5 p-10 bg-gray-50 mt-10 mb-10 items-center justify-center flex-wrap'>
             <div className='mb-4 mt-4 border-b-2 pb-5'>
                 <h1 className='lg:text-3xl text-2xl text-center font-bold text-blue-900'>Our Application Usage Statistics</h1>
             </div>

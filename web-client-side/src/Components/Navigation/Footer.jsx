@@ -71,7 +71,7 @@ const Footer = () => {
                         <img className="w-auto" src="https://i.ibb.co/GQtYkNh/Group-1.jpg" alt="Fast Track Logo" />
                     </a>
 
-                    <p className="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-300">© Copyright 2021. All Rights Reserved.</p>
+                    <p className="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-300">© Copyright 2024. All Rights Reserved.</p>
                 </div>
             </div>
         </footer>
