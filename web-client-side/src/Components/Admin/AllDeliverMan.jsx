@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosPublic from '../../AxiosPublic/useAxiosPublic';
+import { Helmet } from 'react-helmet-async';
 
 const AllDeliverMan = () => {
     const axiosPublic = useAxiosPublic();
@@ -61,6 +62,7 @@ const AllDeliverMan = () => {
 
     return (
         <div className='container mx-auto p-6 bg-gray-100 min-h-screen'>
+            <Helmet><title>Fast Track | Delivery Riders</title></Helmet>
             <div className='mb-6'>
                 <h1 className='text-3xl font-bold text-purple-800'>
                     Available Delivery Riders <span className='text-xl bg-blue-100 text-blue-500 p-2 rounded-md'>{deliveryMen.length}</span>
