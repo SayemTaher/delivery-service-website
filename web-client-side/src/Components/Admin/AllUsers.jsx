@@ -3,6 +3,7 @@ import axios from 'axios';
 import useAxiosPublic from '../../AxiosPublic/useAxiosPublic';
 import Swal from 'sweetalert2';
 import Pagination from './Pagination'; 
+import { Helmet } from 'react-helmet-async';
 
 const AllUsers = () => {
     const [users, setUsers] = useState([]);
@@ -90,6 +91,7 @@ const AllUsers = () => {
 
     return (
         <div className='flex flex-col  gap-5 m-10'>
+            <Helmet><title>Fast Track | All Users</title></Helmet>
             <div className='border-b-2 border-dashed pb-5'>
                 <h1 className='text-purple-800 text-2xl font-bold'>
                     Registered Users
