@@ -47,6 +47,9 @@ Explore the live demo of the project: [Delivery Service Website](https://majesti
 ### 🔒 Note
 
 No one can register as an admin directly. Registered users can choose between user or delivery rider roles during registration.
+Use the following credentials to view and explore the features available for an admin
+email : sayemtaher788@gmail.com
+password : Sayem360
 
 ---
 
